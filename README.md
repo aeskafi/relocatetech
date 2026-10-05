@@ -1,4 +1,4 @@
-# RelocateTech (highly-skilled-job-offers)
+# RelocateTech
 
 > ✈️ The open-source navigator, verified sponsor directory, net salary simulator, and interview mastery platform for tech professionals landing international jobs with visa sponsorship.
 
@@ -6,7 +6,7 @@
 [![Node.js](https://img.shields.io/badge/Node.js-20%2B-teal.svg?style=flat-square)](https://nodejs.org)
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-0-success.svg?style=flat-square)](package.json)
 [![Tests Passing](https://img.shields.io/badge/Tests-9%2F9%20Passing-brightgreen.svg?style=flat-square)](tests/relocate.test.js)
-[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-blue.svg?style=flat-square)](https://github.com/aeskafi/highly-skilled-job-offers/pulls)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-blue.svg?style=flat-square)](https://github.com/aeskafi/relocatetech/pulls)
 
 ---
 
@@ -65,8 +65,8 @@ Relocating internationally as a software engineer or tech specialist should not 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/aeskafi/highly-skilled-job-offers.git
-cd highly-skilled-job-offers
+git clone https://github.com/aeskafi/relocatetech.git
+cd relocatetech
 ```
 
 ### 2. Launch the Application
@@ -133,7 +133,7 @@ Outputs:
 ## 📁 Repository Structure
 
 ```text
-highly-skilled-job-offers/
+relocatetech/
 ├── index.html                 # Standalone web app (GitHub Pages ready)
 ├── server.js                  # Zero-dependency native Node.js HTTP server & API
 ├── package.json               # Project manifest, test scripts & metadata
