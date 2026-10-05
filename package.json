@@ -1,0 +1,27 @@
+{
+  "name": "highly-skilled-job-offers",
+  "version": "2.0.0",
+  "description": "Interactive Web Guide & Navigator for landing global tech relocation offers and visa sponsorship.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "NODE_ENV=test node --test tests/*.test.js"
+  },
+  "keywords": [
+    "relocation",
+    "visa-sponsorship",
+    "tech-jobs",
+    "interview-prep",
+    "ats-resume",
+    "software-engineering",
+    "expat",
+    "work-permit"
+  ],
+  "author": "Arham Eskafi <contact@arham.dev> (https://arham.dev)",
+  "contributors": [
+    "Ario <https://github.com/coditori>"
+  ],
+  "license": "MIT"
+}

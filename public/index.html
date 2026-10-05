@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RelocateTech — Global Tech Relocation, Visa Sponsorship & Compensation Compass</title>
+  <meta name="description" content="Open-source interactive navigator, ATS resume auditor, net salary calculator, and interview mastery toolkit for tech professionals landing visa-sponsored jobs worldwide.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-slate-950">
+
+  <!-- Top Announcement Banner -->
+  <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 text-white text-xs font-semibold py-1.5 px-4 text-center tracking-wide">
+    ✈️ Open-Source Guide & Interactive Platform for Landing International Tech Offers with Visa Sponsorship
+  </div>
+
+  <!-- Header -->
+  <header class="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('countries')">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-500/20 text-slate-950 font-bold text-xl">
+          🌍
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">RelocateTech</span>
+            <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">PRO</span>
+          </div>
+          <p class="text-[11px] text-slate-400 hidden sm:block">Global Tech Relocation & Sponsorship Compass</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="hidden xl:flex items-center space-x-1 bg-slate-950/60 p-1 rounded-xl border border-slate-800">
+        <button onclick="switchTab('countries')" id="nav-countries" class="tab-btn px-2.5 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1 bg-emerald-500/10 text-emerald-400">
+          <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+          <span>Countries</span>
+        </button>
+        <button onclick="switchTab('companies')" id="nav-companies" class="tab-btn px-2.5 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1 text-slate-400 hover:text-slate-200">
+          <i data-lucide="building-2" class="w-3.5 h-3.5"></i>
+          <span>Sponsors</span>
+        </button>
+        <button onclick="switchTab('salary')" id="nav-salary" class="tab-btn px-2.5 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1 text-slate-400 hover:text-slate-200">
+          <i data-lucide="calculator" class="w-3.5 h-3.5"></i>
+          <span>Net Salary</span>
+        </button>
+        <button onclick="switchTab('ats')" id="nav-ats" class="tab-btn px-2.5 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1 text-slate-400 hover:text-slate-200">
+          <i data-lucide="file-check-2" class="w-3.5 h-3.5"></i>
+          <span>ATS Resume</span>
+        </button>
+        <button onclick="switchTab('interviews')" id="nav-interviews" class="tab-btn px-2.5 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1 text-slate-400 hover:text-slate-200">
+          <i data-lucide="messages-square" class="w-3.5 h-3.5"></i>
+          <span>Interviews</span>
+        </button>
+        <button onclick="switchTab('package')" id="nav-package" class="tab-btn px-2.5 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1 text-slate-400 hover:text-slate-200">
+          <i data-lucide="badge-dollar-sign" class="w-3.5 h-3.5"></i>
+          <span>Expat Package</span>
+        </button>
+        <button onclick="switchTab('jobs')" id="nav-jobs" class="tab-btn px-2.5 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1 text-slate-400 hover:text-slate-200">
+          <i data-lucide="briefcase" class="w-3.5 h-3.5"></i>
+          <span>Job Boards</span>
+        </button>
+        <button onclick="switchTab('roadmap')" id="nav-roadmap" class="tab-btn px-2.5 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1 text-slate-400 hover:text-slate-200">
+          <i data-lucide="milestone" class="w-3.5 h-3.5"></i>
+          <span>Roadmap</span>
+        </button>
+      </nav>
+
+      <div class="flex items-center space-x-3">
+        <a href="https://github.com/aeskafi/highly-skilled-job-offers" target="_blank" class="flex items-center space-x-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg transition border border-slate-700">
+          <i data-lucide="github" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Star on GitHub</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile / Tablet Tab Bar -->
+  <div class="xl:hidden border-b border-slate-800 bg-slate-900/90 overflow-x-auto py-2 px-4 flex space-x-2">
+    <button onclick="switchTab('countries')" id="mob-countries" class="whitespace-nowrap px-3 py-1 rounded-lg text-xs font-medium bg-emerald-500/10 text-emerald-400">Countries</button>
+    <button onclick="switchTab('companies')" id="mob-companies" class="whitespace-nowrap px-3 py-1 rounded-lg text-xs font-medium text-slate-400">Sponsors</button>
+    <button onclick="switchTab('salary')" id="mob-salary" class="whitespace-nowrap px-3 py-1 rounded-lg text-xs font-medium text-slate-400">Net Salary</button>
+    <button onclick="switchTab('ats')" id="mob-ats" class="whitespace-nowrap px-3 py-1 rounded-lg text-xs font-medium text-slate-400">ATS Resume</button>
+    <button onclick="switchTab('interviews')" id="mob-interviews" class="whitespace-nowrap px-3 py-1 rounded-lg text-xs font-medium text-slate-400">Interviews</button>
+    <button onclick="switchTab('package')" id="mob-package" class="whitespace-nowrap px-3 py-1 rounded-lg text-xs font-medium text-slate-400">Expat Package</button>
+    <button onclick="switchTab('jobs')" id="mob-jobs" class="whitespace-nowrap px-3 py-1 rounded-lg text-xs font-medium text-slate-400">Job Boards</button>
+    <button onclick="switchTab('roadmap')" id="mob-roadmap" class="whitespace-nowrap px-3 py-1 rounded-lg text-xs font-medium text-slate-400">Roadmap</button>
+  </div>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+
+    <!-- Hero Section -->
+    <div class="relative rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900/90 to-slate-950 border border-slate-800 p-6 sm:p-10 mb-8 overflow-hidden">
+      <div class="absolute -right-20 -top-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="relative z-10 max-w-3xl">
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-xs text-slate-300 mb-4">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Updated for 2026 Global Tech Relocation & Sponsorship</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight">
+          Land a High-Skilled Tech Offer <span class="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">With Visa Sponsorship</span>
+        </h1>
+        <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+          A battle-tested open-source compass for software engineers and tech nomads. Compare real visa criteria, calculate net take-home pay with expat tax breaks, audit your ATS resume, ace technical interviews with the MoSCoW & STAR frameworks, and negotiate 100% covered relocation packages.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <button onclick="switchTab('countries')" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold text-sm shadow-lg shadow-emerald-500/20 transition flex items-center space-x-2">
+            <i data-lucide="compass" class="w-4 h-4"></i>
+            <span>Explore Countries & Visas</span>
+          </button>
+          <button onclick="switchTab('companies')" class="px-5 py-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 font-semibold text-sm border border-slate-700 transition flex items-center space-x-2">
+            <i data-lucide="building-2" class="w-4 h-4"></i>
+            <span>Verified Sponsors Directory</span>
+          </button>
+          <button onclick="switchTab('salary')" class="px-5 py-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-emerald-400 font-semibold text-sm border border-slate-700 transition flex items-center space-x-2">
+            <i data-lucide="calculator" class="w-4 h-4"></i>
+            <span>Calculate Net Salary & Rent</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 1: COUNTRIES & VISA COMPASS -->
+    <section id="tab-countries" class="tab-content">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+            <i data-lucide="map-pin" class="w-5 h-5 text-emerald-400"></i>
+            <span>Country & Visa Sponsorship Matrix</span>
+          </h2>
+          <p class="text-xs text-slate-400">Compare compensation, minimum salary thresholds, tax exemptions, and official government registers.</p>
+        </div>
+        <div class="flex items-center space-x-3">
+          <div class="relative">
+            <input type="text" id="countrySearch" oninput="renderCountries()" placeholder="Search country, hub, or visa..." class="bg-slate-900 border border-slate-800 rounded-xl px-3 py-1.5 pl-8 text-xs text-slate-200 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 w-48 sm:w-64 font-mono">
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-2.5"></i>
+          </div>
+          <select id="regionFilter" onchange="renderCountries()" class="bg-slate-900 border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-slate-300 outline-none focus:border-emerald-500">
+            <option value="all">All Regions</option>
+            <option value="EU">Europe (EU)</option>
+            <option value="Non-EU">Europe (Non-EU)</option>
+            <option value="North America">North America</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Countries Grid -->
+      <div id="countriesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </section>
+
+    <!-- TAB 2: VERIFIED TECH SPONSORS DIRECTORY -->
+    <section id="tab-companies" class="tab-content hidden">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+            <i data-lucide="building-2" class="w-5 h-5 text-emerald-400"></i>
+            <span>Top Verified Visa-Sponsoring Tech Employers</span>
+          </h2>
+          <p class="text-xs text-slate-400">Curated tier-1 engineering companies actively recruiting international specialists with verified relocation packages.</p>
+        </div>
+        <div class="relative">
+          <input type="text" id="companySearch" oninput="renderCompanies()" placeholder="Filter by company, stack, location..." class="bg-slate-900 border border-slate-800 rounded-xl px-3 py-1.5 pl-8 text-xs text-slate-200 outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 w-56 sm:w-72 font-mono">
+          <i data-lucide="search" class="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-2.5"></i>
+        </div>
+      </div>
+
+      <div id="companiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </section>
+
+    <!-- TAB 3: NET SALARY & EXPENSE SIMULATOR -->
+    <section id="tab-salary" class="tab-content hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Calculator Form -->
+        <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 space-y-5">
+          <div>
+            <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+              <i data-lucide="calculator" class="w-5 h-5 text-emerald-400"></i>
+              <span>Relocation Net Salary Simulator</span>
+            </h2>
+            <p class="text-xs text-slate-400 mt-1">Simulate real take-home pay, local housing expenses, and discretionary savings after expat tax relief.</p>
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Target Country</label>
+              <select id="calcCountry" onchange="runSalarySimulation()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none focus:border-emerald-500">
+                <option value="netherlands">🇳🇱 Netherlands (30% Ruling Eligible)</option>
+                <option value="germany">🇩🇪 Germany (Tax Class 1 & Full Social Security)</option>
+                <option value="united-kingdom">🇬🇧 United Kingdom (Income Tax + NI)</option>
+                <option value="switzerland">🇨🇭 Switzerland (Zurich / Low Cantonal)</option>
+                <option value="spain">🇪🇸 Spain (Beckham Law 24% Special Regime)</option>
+                <option value="ireland">🇮🇪 Ireland (Standard 20/40% + USC/PRSI)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Annual Gross Salary Offer</label>
+              <div class="relative">
+                <input type="number" id="calcGross" value="85000" step="1000" oninput="runSalarySimulation()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs font-mono text-slate-100 outline-none focus:border-emerald-500 pl-8">
+                <span id="calcCurrencyPrefix" class="absolute left-3 top-2 text-xs font-mono text-slate-400">€</span>
+              </div>
+            </div>
+
+            <div id="calcExpatToggleWrapper" class="p-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between">
+              <div>
+                <span class="text-xs font-bold text-slate-200">Apply Expat Tax Relief?</span>
+                <p id="calcExpatHelp" class="text-[11px] text-slate-400">e.g. Dutch 30% Ruling or Spanish Beckham Law</p>
+              </div>
+              <input type="checkbox" id="calcExpatToggle" checked onchange="runSalarySimulation()" class="w-4 h-4 rounded text-emerald-500 bg-slate-900 border-slate-700 focus:ring-emerald-500 focus:ring-offset-slate-950 cursor-pointer">
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Estimated Monthly Rent in Tech Hub</label>
+              <div class="relative">
+                <input type="number" id="calcRent" value="1950" step="50" oninput="runSalarySimulation()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs font-mono text-slate-100 outline-none focus:border-emerald-500 pl-8">
+                <span id="calcRentCurrencyPrefix" class="absolute left-3 top-2 text-xs font-mono text-slate-400">€</span>
+              </div>
+              <p id="calcRentNote" class="text-[10px] text-slate-500 mt-1">Average 1-bed apartment in city center</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulation Results -->
+        <div class="lg:col-span-2 space-y-6">
+          <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6">
+            <h3 class="text-sm font-bold text-slate-300 uppercase tracking-wider mb-4">Estimated Monthly Financial Breakdown</h3>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+              <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-center">
+                <span class="text-[11px] text-slate-400 uppercase font-semibold">Gross Monthly</span>
+                <div id="simGrossMonthly" class="text-xl sm:text-2xl font-mono font-bold text-white mt-1">€7,083</div>
+              </div>
+              <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-center">
+                <span class="text-[11px] text-slate-400 uppercase font-semibold">Taxes & Social</span>
+                <div id="simTaxesMonthly" class="text-xl sm:text-2xl font-mono font-bold text-rose-400 mt-1">-€1,770</div>
+              </div>
+              <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/30 text-center">
+                <span class="text-[11px] text-emerald-400 uppercase font-semibold">Net Take-Home</span>
+                <div id="simNetMonthly" class="text-xl sm:text-2xl font-mono font-bold text-emerald-300 mt-1">€5,313</div>
+              </div>
+            </div>
+
+            <!-- Rent vs Savings Visual -->
+            <div class="p-5 rounded-xl bg-slate-950 border border-slate-800 space-y-4">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-400">Estimated Monthly Rent:</span>
+                <span id="simRentVal" class="font-mono font-semibold text-amber-400">-€1,950</span>
+              </div>
+              <div class="flex items-center justify-between text-xs border-t border-slate-800 pt-3">
+                <span class="font-bold text-slate-200">Discretionary Cash Flow & Savings:</span>
+                <span id="simSavingsVal" class="font-mono font-bold text-emerald-400 text-base">€3,363 / month</span>
+              </div>
+            </div>
+
+            <div id="simInsightBox" class="mt-4 p-4 rounded-xl bg-slate-950/80 border border-slate-800 text-xs text-slate-300 leading-relaxed">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 4: ATS RESUME STUDIO & AUDITOR -->
+    <section id="tab-ats" class="tab-content hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Checklist Column -->
+        <div class="lg:col-span-2 space-y-6">
+          <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+                  <i data-lucide="shield-check" class="w-5 h-5 text-emerald-400"></i>
+                  <span>ATS Resume Readiness Audit</span>
+                </h2>
+                <p class="text-xs text-slate-400">Ensure your CV parses cleanly through Taleo, Greenhouse, Workday, and Lever.</p>
+              </div>
+              <div class="flex items-center space-x-3">
+                <button onclick="exportAtsReport()" class="text-xs text-emerald-400 hover:text-emerald-300 font-semibold flex items-center space-x-1">
+                  <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                  <span>Export Report</span>
+                </button>
+                <button onclick="resetAtsChecklist()" class="text-xs text-slate-400 hover:text-slate-200 underline">Reset</button>
+              </div>
+            </div>
+
+            <!-- Interactive Checklist Items -->
+            <div id="atsChecklistContainer" class="space-y-3">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Google XYZ Formula Transformer -->
+          <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6">
+            <h3 class="text-base font-bold text-white mb-2 flex items-center space-x-2">
+              <i data-lucide="wand-2" class="w-4 h-4 text-emerald-400"></i>
+              <span>Google XYZ Bullet Transformer</span>
+            </h3>
+            <p class="text-xs text-slate-400 mb-4">
+              Convert weak task descriptions into high-converting bullet points: <code class="text-emerald-400 font-mono">Accomplished [X] as measured by [Y] by doing [Z]</code>.
+            </p>
+            <div class="space-y-3">
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <input type="text" id="xyzAction" placeholder="[Z] What you did (e.g. Architected Redis caching layer)" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none focus:border-emerald-500">
+                <input type="text" id="xyzOutcome" placeholder="[X] The outcome (e.g. reduced p99 latency)" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none focus:border-emerald-500">
+                <input type="text" id="xyzMetric" placeholder="[Y] Metric/Impact (e.g. by 42% across 3M daily queries)" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none focus:border-emerald-500">
+              </div>
+              <button onclick="generateXyzBullet()" class="w-full py-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-xl text-xs font-semibold transition">
+                ⚡ Generate ATS-Optimized Bullet Point
+              </button>
+              <div id="xyzResult" class="hidden p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs font-mono text-emerald-300 flex items-center justify-between">
+                <span id="xyzResultText"></span>
+                <button onclick="copyToClipboard('xyzResultText')" class="ml-2 text-slate-400 hover:text-white"><i data-lucide="copy" class="w-4 h-4"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ATS Score Meter & Power Verbs -->
+        <div class="space-y-6">
+          <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 sticky top-24">
+            <h3 class="text-sm font-bold text-slate-300 uppercase tracking-wider mb-4">Live ATS Readiness Score</h3>
+            
+            <div class="text-center py-4">
+              <div id="atsScoreValue" class="text-6xl font-extrabold text-emerald-400 mb-1">0%</div>
+              <div id="atsScoreLabel" class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Unchecked</div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full bg-slate-950 rounded-full h-3 border border-slate-800 mb-6 overflow-hidden">
+              <div id="atsProgressBar" class="bg-gradient-to-r from-teal-500 to-emerald-400 h-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+
+            <div id="atsFeedbackBox" class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-400 space-y-2 mb-6">
+              <p>Check the boxes on the left to benchmark your resume against top European and international ATS filtering algorithms.</p>
+            </div>
+
+            <!-- Power Action Verbs Bank -->
+            <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 flex items-center space-x-1.5">
+              <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-400"></i>
+              <span>High-Impact Action Verbs</span>
+            </h4>
+            <div class="flex flex-wrap gap-1.5 text-[11px] font-mono">
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-emerald-300">Architected</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-emerald-300">Spearheaded</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-emerald-300">Refactored</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-emerald-300">Benchmarked</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-emerald-300">Automated</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-emerald-300">Streamlined</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-emerald-300">Engineered</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-emerald-300">Decoupled</span>
+              <span class="px-2 py-0.5 rounded bg-slate-800 text-emerald-300">Orchestrated</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 5: INTERVIEW MASTERY BANK & 2-MIN ELEVATOR TIMER -->
+    <section id="tab-interviews" class="tab-content hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+        <div class="lg:col-span-2">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div>
+              <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+                <i data-lucide="sparkles" class="w-5 h-5 text-emerald-400"></i>
+                <span>Tech & Behavioral Interview Mastery</span>
+              </h2>
+              <p class="text-xs text-slate-400">Battle-tested response templates, system design architectures, and the MoSCoW take-home method.</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <select id="interviewCategoryFilter" onchange="renderInterviewQuestions()" class="bg-slate-900 border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-slate-300 outline-none focus:border-emerald-500">
+                <option value="all">All Categories</option>
+                <option value="HR & Introduction">HR & Introduction</option>
+                <option value="Behavioral & Culture">Behavioral & Culture (STAR)</option>
+                <option value="System Design">System Design</option>
+                <option value="Take-Home & Coding">Take-Home & Coding (MoSCoW)</option>
+                <option value="Reverse Interview (Questions to Ask)">Reverse Interview</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Interview Questions Accordion Container -->
+          <div id="interviewQuestionsContainer" class="space-y-4">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+
+        <!-- 2-Minute Elevator Pitch Simulator -->
+        <div>
+          <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 sticky top-24">
+            <h3 class="text-sm font-bold text-white flex items-center space-x-2 mb-2">
+              <i data-lucide="timer" class="w-4 h-4 text-emerald-400"></i>
+              <span>2-Minute Elevator Pitch Trainer</span>
+            </h3>
+            <p class="text-xs text-slate-400 mb-4">Practice your introductory answer aloud with milestone pacing cues.</p>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-center mb-4">
+              <div id="pitchTimerDisplay" class="text-5xl font-mono font-extrabold text-emerald-400 mb-1">02:00</div>
+              <div id="pitchTimerMilestone" class="text-[11px] text-slate-400 font-medium">Ready when you are</div>
+            </div>
+
+            <div class="flex space-x-2 mb-5">
+              <button onclick="startPitchTimer()" id="pitchStartBtn" class="flex-1 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs rounded-xl transition">
+                Start Pacing
+              </button>
+              <button onclick="pausePitchTimer()" id="pitchPauseBtn" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-xl transition">
+                Pause
+              </button>
+              <button onclick="resetPitchTimer()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-xl transition">
+                Reset
+              </button>
+            </div>
+
+            <div class="space-y-2 text-xs">
+              <div class="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800/80">
+                <span class="font-bold text-emerald-400 font-mono">0:00 - 0:45:</span>
+                <p class="text-slate-400 mt-0.5">Primary stack, current role, and core throughput/scale.</p>
+              </div>
+              <div class="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800/80">
+                <span class="font-bold text-teal-400 font-mono">0:45 - 1:25:</span>
+                <p class="text-slate-400 mt-0.5">Top architectural win with metric-driven impact.</p>
+              </div>
+              <div class="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800/80">
+                <span class="font-bold text-cyan-400 font-mono">1:25 - 2:00:</span>
+                <p class="text-slate-400 mt-0.5">Why this role and why you are excited to relocate now.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: EXPAT PACKAGE & NEGOTIATION CALCULATOR -->
+    <section id="tab-package" class="tab-content hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Left: Relocation Checklist & Value Estimator -->
+        <div class="lg:col-span-2 space-y-6">
+          <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6">
+            <h2 class="text-xl font-bold text-white mb-1 flex items-center space-x-2">
+              <i data-lucide="briefcase" class="w-5 h-5 text-emerald-400"></i>
+              <span>Relocation Package Evaluation Checklist</span>
+            </h2>
+            <p class="text-xs text-slate-400 mb-6">Every legitimate international relocation offer includes these standard components. Check them off as you evaluate offers.</p>
+
+            <div id="packageChecklistContainer" class="space-y-3">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Negotiation Email Template Generator -->
+          <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6">
+            <h3 class="text-base font-bold text-white mb-2 flex items-center space-x-2">
+              <i data-lucide="mail" class="w-4 h-4 text-emerald-400"></i>
+              <span>Relocation Package Negotiation Script Generator</span>
+            </h3>
+            <p class="text-xs text-slate-400 mb-4">Generate a respectful, professional email to negotiate temporary housing, settling allowances, or remote start flexibility.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+              <input type="text" id="negRecruiter" placeholder="Recruiter / Manager Name (e.g. Sarah)" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none focus:border-emerald-500">
+              <input type="text" id="negCompany" placeholder="Company Name (e.g. Adyen)" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none focus:border-emerald-500">
+              <input type="text" id="negCity" placeholder="Destination City (e.g. Amsterdam)" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none focus:border-emerald-500">
+              <input type="text" id="negRequest" placeholder="Primary Negotiation Item (e.g. 60 days temporary accommodation & €5,000 relocation stipend)" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none focus:border-emerald-500">
+            </div>
+
+            <button onclick="generateNegotiationEmail()" class="w-full py-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-xl text-xs font-semibold transition mb-3">
+              Generate Negotiation Email Script
+            </button>
+
+            <div id="emailScriptBox" class="p-4 bg-slate-950 rounded-xl border border-slate-800 text-xs font-mono text-slate-300 relative">
+              <button onclick="copyToClipboard('emailScriptContent')" class="absolute top-3 right-3 p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300">
+                <i data-lucide="copy" class="w-4 h-4"></i>
+              </button>
+              <pre id="emailScriptContent" class="whitespace-pre-wrap font-sans text-xs text-slate-300">Click generate above to create your tailored negotiation script.</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Expat Rules & Tax Relief Quick Reference -->
+        <div class="space-y-6">
+          <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6">
+            <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider mb-4 flex items-center space-x-2">
+              <i data-lucide="percent" class="w-4 h-4 text-emerald-400"></i>
+              <span>Expat Tax Relief Schemes</span>
+            </h3>
+            
+            <div class="space-y-4 text-xs">
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                <div class="font-bold text-emerald-400 mb-1">🇳🇱 Netherlands 30% Ruling</div>
+                <p class="text-slate-400 leading-relaxed">Qualifying foreign specialists recruited from >150km outside the Dutch border receive 30% of their gross salary tax-free for up to 5 years.</p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                <div class="font-bold text-emerald-400 mb-1">🇩🇰 Denmark Researcher Scheme</div>
+                <p class="text-slate-400 leading-relaxed">Flat 32.84% tax rate (including labor market contribution) for highly-paid key employees and researchers for up to 7 years.</p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                <div class="font-bold text-emerald-400 mb-1">🇪🇸 Spain Beckham Law (Special Expat Regime)</div>
+                <p class="text-slate-400 leading-relaxed">Flat 24% tax rate on income up to €600,000 for up to 6 consecutive tax years for relocating engineers and executives.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 7: VERIFIED JOB BOARDS -->
+    <section id="tab-jobs" class="tab-content hidden">
+      <div class="mb-6">
+        <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+          <i data-lucide="search" class="w-5 h-5 text-emerald-400"></i>
+          <span>Curated Visa-Sponsoring Job Portals</span>
+        </h2>
+        <p class="text-xs text-slate-400">Filter platforms that explicitly require employers to verify relocation and work permit sponsorship.</p>
+      </div>
+
+      <div id="jobBoardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- TAB 8: 5-STEP RELOCATION ROADMAP -->
+    <section id="tab-roadmap" class="tab-content hidden">
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 sm:p-8">
+        <h2 class="text-2xl font-bold text-white mb-2">The 5-Step Tech Relocation Roadmap</h2>
+        <p class="text-xs text-slate-400 mb-8 max-w-2xl">From selecting your destination to landing at the airport with a stamped work visa and furnished apartment key.</p>
+
+        <div class="relative border-l border-emerald-500/30 ml-4 sm:ml-8 pl-6 sm:pl-8 space-y-8">
+          
+          <!-- Step 1 -->
+          <div class="relative">
+            <span class="absolute -left-[35px] sm:-left-[43px] top-1 w-6 h-6 rounded-full bg-emerald-500 text-slate-950 font-bold text-xs flex items-center justify-center">1</span>
+            <h3 class="text-base font-bold text-white mb-1">Destination & Official Sponsor Research</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Identify target countries based on language barrier, tech ecosystem, and visa timelines. Consult official government registers (e.g. Netherlands IND list, UK Gov sponsor register) to ensure companies hold valid sponsorship licenses before applying.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="relative">
+            <span class="absolute -left-[35px] sm:-left-[43px] top-1 w-6 h-6 rounded-full bg-emerald-500 text-slate-950 font-bold text-xs flex items-center justify-center">2</span>
+            <h3 class="text-base font-bold text-white mb-1">ATS Optimization & LinkedIn Geo-Targeting</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Strip complex multi-column layouts, graphics, and photos from your CV. Use the Google XYZ formula (<code class="text-emerald-400">Accomplished [X] measured by [Y] by doing [Z]</code>). Switch LinkedIn "Open to Work" location to your target country (e.g. Amsterdam, Berlin, London) to appear in local recruiter searches.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="relative">
+            <span class="absolute -left-[35px] sm:-left-[43px] top-1 w-6 h-6 rounded-full bg-emerald-500 text-slate-950 font-bold text-xs flex items-center justify-center">3</span>
+            <h3 class="text-base font-bold text-white mb-1">High-Signal Recruiter Outreach & Applications</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Target talent acquisition managers and engineering directors directly with a concise 3-sentence note outlining years of experience, primary stack, and immediate availability for visa relocation. Prioritize verified visa platforms like Relocate.me, Honeypot, and Landing.Jobs.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="relative">
+            <span class="absolute -left-[35px] sm:-left-[43px] top-1 w-6 h-6 rounded-full bg-emerald-500 text-slate-950 font-bold text-xs flex items-center justify-center">4</span>
+            <h3 class="text-base font-bold text-white mb-1">Technical & Behavioral Interview Mastery</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Deliver sharp 5-minute introductions. Frame behavioral answers with the STAR method. Approach take-home assignments with the MoSCoW framework: ship clean, fully tested core functionality (TDD) rather than over-engineering unfinished features.
+            </p>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="relative">
+            <span class="absolute -left-[35px] sm:-left-[43px] top-1 w-6 h-6 rounded-full bg-emerald-500 text-slate-950 font-bold text-xs flex items-center justify-center">5</span>
+            <h3 class="text-base font-bold text-white mb-1">Package Negotiation, Visa Filing & Relocation</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Ensure the offer contract includes flight reimbursements, 30-60 days temporary furnished apartment, settling-in allowance, and visa filing fees for dependents. Obtain apostilles for diplomas and marriage/birth certificates early while embassy processing proceeds.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-2">
+        <span class="font-bold text-slate-300">RelocateTech Navigator</span>
+        <span>•</span>
+        <span>Open-source community project</span>
+      </div>
+      <div>
+        Curated by <a href="https://arham.dev" target="_blank" class="text-emerald-400 hover:underline font-semibold">Arham Eskafi</a> 
+        — Tech Nomad journey documented on <a href="https://youtube.com/@walkcooklive" target="_blank" class="text-teal-400 hover:underline font-semibold">Walk Cook Live</a>. 
+        Originally created by <a href="https://github.com/coditori" target="_blank" class="text-slate-400 hover:underline">Ario (Coditori)</a>.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Country Detail Modal -->
+  <div id="countryModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-xl w-full p-6 sm:p-8 relative shadow-2xl">
+      <button onclick="closeCountryModal()" class="absolute top-4 right-4 p-2 text-slate-400 hover:text-white rounded-full bg-slate-800 hover:bg-slate-700">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div id="countryModalContent">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Logic -->
+  <script>
+    let appData = {
+      countries: [],
+      atsChecklist: [],
+      interviewQuestions: [],
+      relocationPackageChecklist: [],
+      verifiedJobBoards: [],
+      topSponsoringCompanies: []
+    };
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      const activeTab = document.getElementById(`tab-${tabId}`);
+      if (activeTab) activeTab.classList.remove('hidden');
+
+      // Update desktop buttons
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-emerald-500/10', 'text-emerald-400');
+        btn.classList.add('text-slate-400');
+      });
+      const activeBtn = document.getElementById(`nav-${tabId}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-emerald-500/10', 'text-emerald-400');
+        activeBtn.classList.remove('text-slate-400');
+      }
+
+      // Update mobile buttons
+      const mobButtons = ['countries', 'companies', 'salary', 'ats', 'interviews', 'package', 'jobs', 'roadmap'];
+      mobButtons.forEach(m => {
+        const mobEl = document.getElementById(`mob-${m}`);
+        if (mobEl) {
+          if (m === tabId) {
+            mobEl.className = "whitespace-nowrap px-3 py-1 rounded-lg text-xs font-medium bg-emerald-500/10 text-emerald-400";
+          } else {
+            mobEl.className = "whitespace-nowrap px-3 py-1 rounded-lg text-xs font-medium text-slate-400";
+          }
+        }
+      });
+
+      if (tabId === 'salary') {
+        runSalarySimulation();
+      }
+
+      lucide.createIcons();
+    }
+
+    async function loadData() {
+      try {
+        const res = await fetch('/api/data');
+        if (res.ok) {
+          appData = await res.json();
+        } else {
+          throw new Error('API offline');
+        }
+      } catch (e) {
+        console.warn('API error, using default data:', e);
+      }
+
+      renderCountries();
+      renderCompanies();
+      renderAtsChecklist();
+      renderInterviewQuestions();
+      renderPackageChecklist();
+      renderJobBoards();
+      runSalarySimulation();
+      lucide.createIcons();
+    }
+
+    // Render Countries
+    function renderCountries() {
+      const container = document.getElementById('countriesGrid');
+      const search = (document.getElementById('countrySearch').value || '').toLowerCase();
+      const region = document.getElementById('regionFilter').value;
+
+      const filtered = (appData.countries || []).filter(c => {
+        const matchesSearch = c.name.toLowerCase().includes(search) || 
+                              c.primaryVisa.toLowerCase().includes(search) ||
+                              (c.keyTechHubs && c.keyTechHubs.some(h => h.toLowerCase().includes(search)));
+        const matchesRegion = region === 'all' || c.region.includes(region);
+        return matchesSearch && matchesRegion;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500 text-sm">No countries found matching your search.</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(c => `
+        <div class="bg-slate-900/60 border border-slate-800 hover:border-slate-700 rounded-2xl p-5 transition flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center space-x-2.5">
+                <span class="text-2xl">${c.flag}</span>
+                <div>
+                  <h3 class="font-bold text-white text-base">${c.name}</h3>
+                  <span class="text-[11px] text-slate-400">${c.region}</span>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">${c.visaEase} Ease</span>
+            </div>
+
+            <div class="space-y-2 text-xs mb-4">
+              <div class="flex justify-between py-1 border-b border-slate-800/60">
+                <span class="text-slate-400">Dev Salary:</span>
+                <span class="font-mono font-semibold text-slate-200">${c.avgSalaryDev}</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-slate-800/60">
+                <span class="text-slate-400">Primary Visa:</span>
+                <span class="text-slate-200 truncate max-w-[170px]" title="${c.primaryVisa}">${c.primaryVisa}</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-slate-800/60">
+                <span class="text-slate-400">Tax Advantage:</span>
+                <span class="text-emerald-400 truncate max-w-[170px]" title="${c.taxScheme}">${c.taxScheme}</span>
+              </div>
+              <div class="flex justify-between py-1">
+                <span class="text-slate-400">PR Pathway:</span>
+                <span class="text-slate-200 font-mono">${c.prYears} years</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
+            <a href="${c.officialSponsorRegistry}" target="_blank" class="text-[11px] text-emerald-400 hover:text-emerald-300 flex items-center space-x-1 font-semibold">
+              <span>Official Sponsors</span>
+              <i data-lucide="external-link" class="w-3 h-3"></i>
+            </a>
+            <button onclick="openCountryModal('${c.id}')" class="px-2.5 py-1 text-xs rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition">
+              Details
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    // Modal Details
+    function openCountryModal(id) {
+      const c = (appData.countries || []).find(item => item.id === id);
+      if (!c) return;
+      const content = document.getElementById('countryModalContent');
+      content.innerHTML = `
+        <div class="flex items-center space-x-3 mb-4">
+          <span class="text-4xl">${c.flag}</span>
+          <div>
+            <h3 class="text-xl font-bold text-white">${c.name}</h3>
+            <p class="text-xs text-slate-400">${c.region} • ${c.primaryVisa}</p>
+          </div>
+        </div>
+        <div class="space-y-3 text-xs mb-6">
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+            <div class="font-semibold text-slate-300 mb-1">Minimum Salary Requirement:</div>
+            <div class="text-emerald-400 font-mono">${c.minSalaryRequirement || 'Standard prevailing wage'}</div>
+          </div>
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+            <div class="font-semibold text-slate-300 mb-1">Key Tech Hubs:</div>
+            <div class="text-emerald-400 font-mono">${(c.keyTechHubs || []).join(', ')}</div>
+          </div>
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+            <div class="font-semibold text-slate-300 mb-1">Tax Scheme & Expat Benefit:</div>
+            <div class="text-slate-300">${c.taxReliefDescription || c.taxScheme}</div>
+          </div>
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+            <div class="font-semibold text-slate-300 mb-2">Relocation Highlights:</div>
+            <ul class="space-y-1.5 text-slate-400">
+              ${(c.highlights || []).map(h => `<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>${h}</span></li>`).join('')}
+            </ul>
+          </div>
+        </div>
+        <div class="flex space-x-3">
+          <a href="${c.officialSponsorRegistry}" target="_blank" class="flex-1 py-2 text-center rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition">
+            View Official Government Sponsor List
+          </a>
+        </div>
+      `;
+      document.getElementById('countryModal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeCountryModal() {
+      document.getElementById('countryModal').classList.add('hidden');
+    }
+
+    // Render Sponsoring Companies
+    function renderCompanies() {
+      const container = document.getElementById('companiesGrid');
+      const search = (document.getElementById('companySearch')?.value || '').toLowerCase();
+      const list = (appData.topSponsoringCompanies || []).filter(comp => {
+        return comp.name.toLowerCase().includes(search) ||
+               comp.locations.toLowerCase().includes(search) ||
+               comp.stack.toLowerCase().includes(search);
+      });
+
+      if (list.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500 text-sm">No companies found matching search.</div>`;
+        return;
+      }
+
+      container.innerHTML = list.map(comp => `
+        <div class="bg-slate-900/60 border border-slate-800 hover:border-emerald-500/30 rounded-2xl p-5 transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-bold text-white text-base">${comp.name}</h3>
+              <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Active Sponsor</span>
+            </div>
+            <div class="text-xs text-slate-400 flex items-center space-x-1 mb-3">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-500"></i>
+              <span>${comp.locations}</span>
+            </div>
+
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800/80 mb-3 space-y-1.5 text-xs">
+              <div class="font-semibold text-slate-300">Visa Category:</div>
+              <div class="text-emerald-400 font-mono text-[11px]">${comp.visaType}</div>
+              <div class="font-semibold text-slate-300 pt-1">Relocation Package:</div>
+              <div class="text-slate-400 text-[11px] leading-relaxed">${comp.relocationPerks}</div>
+            </div>
+
+            <div class="mb-4">
+              <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Tech Stack:</span>
+              <div class="flex flex-wrap gap-1 mt-1">
+                ${comp.stack.split(', ').map(s => `<span class="px-2 py-0.5 text-[10px] rounded bg-slate-800 text-slate-300 font-mono">${s}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+
+          <a href="${comp.careersUrl}" target="_blank" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-xl text-center transition flex items-center justify-center space-x-1.5">
+            <span>View Open Positions</span>
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    // Salary Simulation Logic
+    function runSalarySimulation() {
+      const countryKey = document.getElementById('calcCountry').value;
+      const annualGross = parseFloat(document.getElementById('calcGross').value) || 0;
+      const applyExpat = document.getElementById('calcExpatToggle').checked;
+      const rent = parseFloat(document.getElementById('calcRent').value) || 0;
+
+      const monthlyGross = Math.round(annualGross / 12);
+      let effectiveTaxRate = 0.35;
+      let currency = '€';
+      let insight = '';
+
+      if (countryKey === 'netherlands') {
+        currency = '€';
+        if (applyExpat) {
+          effectiveTaxRate = 0.24;
+          insight = '💡 With the <strong>Dutch 30% Ruling</strong>, your effective deduction is approximately 24% instead of ~38%. You retain €900 - €1,200 more net every month for up to 5 years!';
+        } else {
+          effectiveTaxRate = 0.38;
+          insight = 'Standard Dutch Box 1 income tax rate applies (~38% effective rate on this bracket).';
+        }
+      } else if (countryKey === 'germany') {
+        currency = '€';
+        effectiveTaxRate = 0.41;
+        insight = 'Includes German income tax (Class 1) plus statutory social security contributions: Health insurance (~7.3% employee share capped), Pension (9.3%), Unemployment (1.3%), and Care (2.2%).';
+      } else if (countryKey === 'united-kingdom') {
+        currency = '£';
+        effectiveTaxRate = 0.33;
+        insight = 'Includes UK Income Tax with £12,570 Personal Allowance + National Insurance Class 1 deductions (8% on standard bands, 2% above).';
+      } else if (countryKey === 'switzerland') {
+        currency = 'CHF';
+        effectiveTaxRate = 0.20;
+        insight = 'Switzerland boasts Europe\'s lowest effective income tax rates (~18-22% in Zurich canton including AHV/IV/ALV social insurance).';
+      } else if (countryKey === 'spain') {
+        currency = '€';
+        if (applyExpat) {
+          effectiveTaxRate = 0.26;
+          insight = '💡 Under the <strong>Spanish Beckham Law</strong>, foreign specialists are taxed at a flat 24% rate plus capped social security for up to 6 years.';
+        } else {
+          effectiveTaxRate = 0.35;
+          insight = 'Standard Spanish autonomous community progressive tax bands apply.';
+        }
+      } else if (countryKey === 'ireland') {
+        currency = '€';
+        effectiveTaxRate = 0.38;
+        insight = 'Irish standard 20% and 40% tax bands combined with Universal Social Charge (USC) and Pay Related Social Insurance (PRSI).';
+      }
+
+      document.getElementById('calcCurrencyPrefix').innerText = currency;
+      document.getElementById('calcRentCurrencyPrefix').innerText = currency;
+
+      const monthlyTax = Math.round(monthlyGross * effectiveTaxRate);
+      const monthlyNet = monthlyGross - monthlyTax;
+      const discretionary = monthlyNet - rent;
+
+      document.getElementById('simGrossMonthly').innerText = `${currency}${monthlyGross.toLocaleString()}`;
+      document.getElementById('simTaxesMonthly').innerText = `-${currency}${monthlyTax.toLocaleString()} (${Math.round(effectiveTaxRate * 100)}%)`;
+      document.getElementById('simNetMonthly').innerText = `${currency}${monthlyNet.toLocaleString()}`;
+      document.getElementById('simRentVal').innerText = `-${currency}${rent.toLocaleString()}`;
+      
+      const savingsEl = document.getElementById('simSavingsVal');
+      savingsEl.innerText = `${currency}${discretionary.toLocaleString()} / month`;
+      if (discretionary > 2000) {
+        savingsEl.className = "font-mono font-bold text-emerald-400 text-base";
+      } else if (discretionary > 1000) {
+        savingsEl.className = "font-mono font-bold text-teal-400 text-base";
+      } else {
+        savingsEl.className = "font-mono font-bold text-amber-400 text-base";
+      }
+
+      document.getElementById('simInsightBox').innerHTML = insight;
+    }
+
+    // 2-Minute Elevator Pitch Timer
+    let pitchTimeRemaining = 120;
+    let pitchInterval = null;
+
+    function formatPitchTime(secs) {
+      const m = Math.floor(secs / 60).toString().padStart(2, '0');
+      const s = (secs % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    function updatePitchMilestone() {
+      const elapsed = 120 - pitchTimeRemaining;
+      const label = document.getElementById('pitchTimerMilestone');
+      if (elapsed < 45) {
+        label.innerText = "Phase 1: Present Core Stack, Years & System Throughput";
+        label.className = "text-[11px] text-emerald-400 font-semibold";
+      } else if (elapsed < 85) {
+        label.innerText = "Phase 2: Dive into Top Architectural Win & Quantified Impact";
+        label.className = "text-[11px] text-teal-400 font-semibold";
+      } else if (pitchTimeRemaining > 0) {
+        label.innerText = "Phase 3: Explain Why This Company & Motivation to Relocate";
+        label.className = "text-[11px] text-cyan-400 font-semibold";
+      } else {
+        label.innerText = "🏁 Perfect Timing! Close with enthusiasm.";
+        label.className = "text-[11px] text-emerald-300 font-bold";
+      }
+    }
+
+    function startPitchTimer() {
+      if (pitchInterval) return;
+      pitchInterval = setInterval(() => {
+        if (pitchTimeRemaining > 0) {
+          pitchTimeRemaining--;
+          document.getElementById('pitchTimerDisplay').innerText = formatPitchTime(pitchTimeRemaining);
+          updatePitchMilestone();
+        } else {
+          clearInterval(pitchInterval);
+          pitchInterval = null;
+        }
+      }, 1000);
+    }
+
+    function pausePitchTimer() {
+      if (pitchInterval) {
+        clearInterval(pitchInterval);
+        pitchInterval = null;
+      }
+    }
+
+    function resetPitchTimer() {
+      pausePitchTimer();
+      pitchTimeRemaining = 120;
+      document.getElementById('pitchTimerDisplay').innerText = "02:00";
+      document.getElementById('pitchTimerMilestone').innerText = "Ready when you are";
+      document.getElementById('pitchTimerMilestone').className = "text-[11px] text-slate-400 font-medium";
+    }
+
+    // ATS Checklist Logic
+    let checkedAtsItems = JSON.parse(localStorage.getItem('relocatetech_ats_state') || '{}');
+
+    function renderAtsChecklist() {
+      const container = document.getElementById('atsChecklistContainer');
+      const items = appData.atsChecklist || [];
+
+      container.innerHTML = items.map(item => {
+        const isChecked = !!checkedAtsItems[item.id];
+        return `
+          <div class="p-3.5 rounded-xl border ${isChecked ? 'bg-emerald-950/20 border-emerald-500/30' : 'bg-slate-950/40 border-slate-800/80'} transition flex items-start space-x-3">
+            <input type="checkbox" id="${item.id}" onchange="toggleAtsItem('${item.id}')" ${isChecked ? 'checked' : ''} class="mt-1 w-4 h-4 rounded text-emerald-500 bg-slate-900 border-slate-700 focus:ring-emerald-500 focus:ring-offset-slate-950 cursor-pointer">
+            <div class="flex-1 cursor-pointer" onclick="toggleAtsItem('${item.id}')">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-200">${item.title}</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-400">${item.category}</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-0.5 leading-relaxed">${item.description}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      calculateAtsScore();
+    }
+
+    function toggleAtsItem(id) {
+      checkedAtsItems[id] = !checkedAtsItems[id];
+      localStorage.setItem('relocatetech_ats_state', JSON.stringify(checkedAtsItems));
+      renderAtsChecklist();
+    }
+
+    function resetAtsChecklist() {
+      checkedAtsItems = {};
+      localStorage.removeItem('relocatetech_ats_state');
+      renderAtsChecklist();
+    }
+
+    function calculateAtsScore() {
+      const items = appData.atsChecklist || [];
+      if (items.length === 0) return;
+      const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
+      const earnedWeight = items.reduce((sum, item) => sum + (checkedAtsItems[item.id] ? item.weight : 0), 0);
+      const score = Math.round((earnedWeight / totalWeight) * 100);
+
+      document.getElementById('atsScoreValue').innerText = `${score}%`;
+      document.getElementById('atsProgressBar').style.width = `${score}%`;
+
+      const labelEl = document.getElementById('atsScoreLabel');
+      const feedbackEl = document.getElementById('atsFeedbackBox');
+
+      if (score >= 90) {
+        labelEl.innerText = "⭐ Elite ATS Ready (Top 5%)";
+        labelEl.className = "text-xs font-semibold text-emerald-400 uppercase tracking-wider";
+        feedbackEl.innerHTML = `<p class="text-emerald-300 font-medium">Your resume structure is bulletproof. It conforms to parsing standards for international visa-sponsoring employers.</p>`;
+      } else if (score >= 70) {
+        labelEl.innerText = "👍 Strong (Passes most filters)";
+        labelEl.className = "text-xs font-semibold text-teal-400 uppercase tracking-wider";
+        feedbackEl.innerHTML = `<p class="text-slate-300">Solid foundation. Complete remaining action items to maximize recruiter response rate.</p>`;
+      } else if (score >= 40) {
+        labelEl.innerText = "⚠️ Needs Polish (High Filter Risk)";
+        labelEl.className = "text-xs font-semibold text-amber-400 uppercase tracking-wider";
+        feedbackEl.innerHTML = `<p class="text-amber-300">Several critical factors may cause automated scrapers (Workday, Taleo) to discard your resume before human review.</p>`;
+      } else {
+        labelEl.innerText = "🚨 Critical Risk";
+        labelEl.className = "text-xs font-semibold text-rose-400 uppercase tracking-wider";
+        feedbackEl.innerHTML = `<p class="text-rose-300">Complete the checklist to transform your CV into an ATS-compatible format.</p>`;
+      }
+    }
+
+    function exportAtsReport() {
+      const items = appData.atsChecklist || [];
+      const score = document.getElementById('atsScoreValue').innerText;
+      let text = `# RelocateTech ATS Audit Report\nScore: ${score}\nDate: ${new Date().toLocaleDateString()}\n\n`;
+      items.forEach(item => {
+        const passed = checkedAtsItems[item.id] ? 'PASSED' : 'PENDING ACTION';
+        text += `[${passed}] ${item.title} (${item.category})\n- Recommendation: ${item.action}\n\n`;
+      });
+      navigator.clipboard.writeText(text).then(() => {
+        alert('ATS Audit Report copied to clipboard in Markdown format!');
+      });
+    }
+
+    // Google XYZ Formula Generator
+    function generateXyzBullet() {
+      const action = document.getElementById('xyzAction').value.trim();
+      const outcome = document.getElementById('xyzOutcome').value.trim();
+      const metric = document.getElementById('xyzMetric').value.trim();
+
+      if (!action || !outcome || !metric) {
+        alert('Please fill out all 3 fields of the Google XYZ formula.');
+        return;
+      }
+
+      const bullet = `• ${action}, successfully ${outcome} ${metric}.`;
+      document.getElementById('xyzResultText').innerText = bullet;
+      document.getElementById('xyzResult').classList.remove('hidden');
+    }
+
+    // Interview Questions Accordion
+    function renderInterviewQuestions() {
+      const container = document.getElementById('interviewQuestionsContainer');
+      const filter = document.getElementById('interviewCategoryFilter').value;
+      const items = (appData.interviewQuestions || []).filter(q => filter === 'all' || q.category === filter);
+
+      if (items.length === 0) {
+        container.innerHTML = `<div class="text-center py-8 text-slate-500 text-xs">No questions found.</div>`;
+        return;
+      }
+
+      container.innerHTML = items.map(q => `
+        <details class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 group open:border-emerald-500/30 transition">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <div class="flex items-center space-x-3">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-800 text-emerald-400 border border-slate-700">${q.category}</span>
+              <span class="text-sm font-bold text-white group-hover:text-emerald-300 transition">${q.title}</span>
+            </div>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <div class="mt-4 pt-4 border-t border-slate-800/80 space-y-3 text-xs">
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+              <span class="text-slate-400 font-semibold">The Prompt:</span>
+              <p class="text-slate-200 mt-1 italic">"${q.question}"</p>
+            </div>
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+              <span class="text-emerald-400 font-semibold">Strategic Game Plan:</span>
+              <p class="text-slate-300 mt-1 leading-relaxed">${q.strategy}</p>
+            </div>
+            <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+              <span class="text-teal-400 font-semibold">Model Response:</span>
+              <p class="text-slate-300 mt-1 leading-relaxed font-sans whitespace-pre-line">${q.modelAnswer}</p>
+            </div>
+            <div class="p-3 bg-rose-950/20 rounded-xl border border-rose-900/30">
+              <span class="text-rose-400 font-semibold">⚠️ Trap to Avoid:</span>
+              <p class="text-rose-300 mt-1">${q.pitfalls}</p>
+            </div>
+          </div>
+        </details>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    // Expat Package Checklist
+    function renderPackageChecklist() {
+      const container = document.getElementById('packageChecklistContainer');
+      const items = appData.relocationPackageChecklist || [];
+
+      container.innerHTML = items.map(item => `
+        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="text-xs font-bold text-white">${item.item}</span>
+              <span class="px-2 py-0.5 text-[9px] rounded font-bold ${item.priority === 'Essential' ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20' : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'}">${item.priority}</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-1">${item.tips}</p>
+          </div>
+          <div class="sm:text-right shrink-0">
+            <span class="text-xs font-mono font-semibold text-emerald-400">${item.typicalValue}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function generateNegotiationEmail() {
+      const recruiter = document.getElementById('negRecruiter').value.trim() || 'Hiring Team';
+      const company = document.getElementById('negCompany').value.trim() || '[Company]';
+      const city = document.getElementById('negCity').value.trim() || '[Destination City]';
+      const request = document.getElementById('negRequest').value.trim() || '60 days temporary furnished housing and €5,000 relocation stipend';
+
+      const script = `Subject: Excited for the Offer! Question regarding Relocation Package — [Your Name]
+
+Hi ${recruiter},
+
+Thank you so much for extending the offer to join ${company}! I am truly thrilled about the opportunity to contribute to the engineering team and relocate to ${city}.
+
+To ensure a smooth transition for my international relocation and allow me to hit the ground running without housing disruptions, I would like to discuss including ${request}. Given the current competitive housing market in ${city}, this support will ensure I am settled and fully focused on engineering deliverables from day one.
+
+I am eager to finalize the agreement and begin the visa application paperwork as soon as we align on this. Thank you again for your partnership!
+
+Warm regards,
+[Your Name]
+[Your Phone Number]`;
+
+      document.getElementById('emailScriptContent').innerText = script;
+    }
+
+    function renderJobBoards() {
+      const container = document.getElementById('jobBoardsGrid');
+      const items = appData.verifiedJobBoards || [];
+
+      container.innerHTML = items.map(jb => `
+        <div class="bg-slate-900/60 border border-slate-800 hover:border-emerald-500/30 rounded-2xl p-5 transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-bold text-white text-base">${jb.name}</h3>
+              <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Visa Verified</span>
+            </div>
+            <span class="text-[10px] font-mono text-slate-400 uppercase tracking-wider">${jb.category}</span>
+            <p class="text-xs text-slate-300 mt-2 mb-3 leading-relaxed">${jb.description}</p>
+            <div class="text-[11px] text-slate-400 mb-4">
+              <span class="font-semibold text-slate-300">Coverage:</span> ${jb.countries}
+            </div>
+          </div>
+          <a href="${jb.url}" target="_blank" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-xl text-center transition flex items-center justify-center space-x-1.5">
+            <span>Explore Jobs</span>
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function copyToClipboard(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Copied to clipboard!');
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadData();
+    });
+  </script>
+</body>
+</html>
